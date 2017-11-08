@@ -53,7 +53,7 @@ namespace Servicio_de_lavado_de_autos___PF
                             if (Saldo > 0)
                             {
                                 //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                if (Saldo < 45)
+                                if (Saldo >=50)
                                 {
                                     //Switch del menu de lavado tamaño compacto
                                     switch (res_lavado)
@@ -107,7 +107,7 @@ namespace Servicio_de_lavado_de_autos___PF
                             if (Saldo > 0)
                             {
                                 //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                if (Saldo < 45)
+                                if (Saldo >=65)
                                 {
                                     //Switch del menu de lavado tamaño sedan
                                     switch (res_lavado)
@@ -161,7 +161,7 @@ namespace Servicio_de_lavado_de_autos___PF
                             if (Saldo > 0)
                             {
                                 //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                if (Saldo < 45)
+                                if (Saldo >=60)
                                 {
                                     //Switch del menu de lavado tamaño SUV
                                     switch (res_lavado)
