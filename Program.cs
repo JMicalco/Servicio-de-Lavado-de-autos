@@ -522,7 +522,24 @@ namespace Servicio_de_lavado_de_autos___PF
 
                         break;
                 case 4:
-                    Console.WriteLine("El costo de una terjeta es de 25.00 $");
+                       //Pregunta para verificar si el usuario tiene tarjeta
+                    Console.WriteLine("Tienes tarjeta");
+                    res_tarj = Console.ReadLine();
+                    //Condicional en caso de que si tenga
+                    if (res_tarj=="si"||res_tarj=="Si")
+                    {
+                        Console.WriteLine("¿Cuanto saldo quieres recargar");
+                        nuevo_saldo = Convert.ToDouble(Console.ReadLine());
+                        Saldo = Saldo + nuevo_saldo;
+                        
+                    }//Condicional en caso de que no tenga
+                    else if (res_tarj == "no" || res_tarj == "No")
+                    {
+                        Console.WriteLine("El costo de una terjeta es de 25.00 $");
+                        Console.WriteLine("¿Cuanto saldo quieres recargar");
+                        nuevo_saldo = Convert.ToDouble(Console.ReadLine());
+                        nuevo_saldo = nuevo_saldo - 25;
+                        Saldo = Saldo + nuevo_saldo;
                     break;
                 case 5:
                     Console.WriteLine("Saldo: {0:C}",Saldo);
