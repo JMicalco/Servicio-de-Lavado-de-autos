@@ -28,6 +28,7 @@ namespace Servicio_de_lavado_de_autos___PF
 
 
             Console.WriteLine("Elige una opción del menu (Ingresa el numero de la opción)");
+            menu_op = Convert.ToInt32(Console.ReadLine());
             //Switch de cada opcion del menu principal
             switch (menu_op)
             {
