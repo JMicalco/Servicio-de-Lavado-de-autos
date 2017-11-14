@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicio_de_lavado_de_autos___PF
+namespace ConsoleApplication14
 {
     class Program
     {
@@ -12,7 +12,7 @@ namespace Servicio_de_lavado_de_autos___PF
         {
             //Variables
             String Tam_car, res_do_lavado, color_auto, reparado, contraseña, res_tarj;
-            Double Saldo = 0.00, descuento_lavado = 0, paquete_completo = 0, tam_pieza, detallado_expres = 0, descuento_color = 0, reparacion = 0, costo_base = 10, descuento_pz = 0, costo_pz = 0, nuevo_saldo = 0, acumulador_total = 0, acumulador_lavado = 0, acumulador_det = 0, acumulador_fb = 0;
+            Double Saldo = 50.00, descuento_lavado = 0, paquete_completo = 0, tam_pieza, detallado_expres = 0, descuento_color = 0, reparacion = 0, costo_base = 10, descuento_pz = 0, costo_pz = 0, nuevo_saldo = 0, acumulador_total = 0, acumulador_lavado = 0, acumulador_det = 0, acumulador_fb = 0;
             Int32 menu_op = 0, res_lavado = 0, lavado_completo = 0, lavado_tolvas = 0, abrillantado = 0, detallado_general = 0, res_detallado = 0, operaciones = 0;
             do
             {
@@ -33,314 +33,259 @@ namespace Servicio_de_lavado_de_autos___PF
                 {
                     //Lavado 
                     case 1:
-                        Console.WriteLine("Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
-                        Tam_car = Console.ReadLine();
                         //Menu de lavado
                         Console.WriteLine("Elige una opcion: ");
-                        Console.WriteLine("1.Lavado Completo ");
-                        Console.WriteLine("2.Lavado de Tolvas ");
-                        Console.WriteLine("3.Abrillantado de vidrio ");
-                        Console.WriteLine("4.Detallado general ");
-                        Console.WriteLine("5.Paquete completo  ");
+                        Console.WriteLine("1.Lavado Completo (Compacto:100$ - Sedan:125$ -SUV:150$)");
+                        Console.WriteLine("2.Lavado de Tolvas(Compacto:65$ - Sedan:70$ -SUV:80$) ");
+                        Console.WriteLine("3.Abrillantado de vidrio (Compacto:50$ - Sedan:65$ -SUV:90$)");
+                        Console.WriteLine("4.Detallado general (Compacto:70$ - Sedan:80$ -SUV:90$)");
+                        Console.WriteLine("5.Paquete completo  (Compacto:256$ - Sedan:306$ -SUV:369$)");
                         res_lavado = Convert.ToInt32(Console.ReadLine());
 
-                        //Tamaño compatco
-                        if (Tam_car == "Compacto" || Tam_car == "compacto")
+                        if (Saldo >=50)
                         {
-                            do
+                            Console.WriteLine("Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                            Tam_car = Console.ReadLine();
+
+                            if (Tam_car == "Compacto" || Tam_car == "compacto")
                             {
-                                //Condicional para verificar que el saldo es mayor a 0
-                                if (Saldo > 0)
+                                do
                                 {
-                                    //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                    if (Saldo >= 50)
+                                    //Switch del menu de lavado tamaño compacto
+                                    switch (res_lavado)
                                     {
-                                        //Switch del menu de lavado tamaño compacto
-                                        switch (res_lavado)
-                                        {
-                                            case 1:
-                                                if (Saldo >= 100)
-                                                {
-                                                    lavado_completo = 100;
-                                                    Saldo = Saldo - lavado_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 2:
-                                                if (Saldo >= 65)
-                                                {
-                                                    lavado_tolvas = 65;
-                                                    Saldo = Saldo - lavado_tolvas;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_tolvas;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 3:
-                                                abrillantado = 50;
-                                                Saldo = Saldo - abrillantado;
-                                                operaciones++;                                           
-                                                acumulador_lavado = acumulador_lavado + abrillantado;
-                                                acumulador_total = acumulador_total + acumulador_lavado;
-                                                break;
-                                            case 4:
-                                                if (Saldo >= 70)
-                                                {
-                                                    detallado_general = 70;
-                                                    Saldo = Saldo - detallado_general;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + detallado_general;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-
-                                                break;
-                                            case 5:
-                                                if (Saldo >= 285)
-                                                {
-                                                    descuento_lavado = ((100 + 65 + 50 + 70) * 10) / 100;
-                                                    paquete_completo = (100 + 65 + 50 + 70) - descuento_lavado;
-                                                    Saldo = Saldo - paquete_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + paquete_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-
-                                                break;
-                                            default:
-                                                Console.WriteLine("Error, respuesta no encontrada");
-                                                break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para realizar cualquier tipo de servico de lavado");
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Lo lamento tu saldo es 0 por favor haz una recarga");
-                                }
-                                Console.WriteLine("¿Quieres otro servicio de lavado?");
-                                res_do_lavado = Console.ReadLine();
-                            } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
-                        }
-
-                        //Tamaño Sedan
-                        else if (Tam_car == "sedan" || Tam_car == "Sedan")
-                        {
-                            do
-                            {
-                                //Condicional para verificar que el saldo es mayor a 0
-                                if (Saldo > 0)
-                                {
-                                    //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                    if (Saldo >= 65)
-                                    {
-                                        //Switch del menu de lavado tamaño sedan
-                                        switch (res_lavado)
-                                        {
-                                            case 1:
-                                                if (Saldo >= 125)
-                                                {
-                                                    lavado_completo = 125;
-                                                    Saldo = Saldo - lavado_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 2:
-                                                if (Saldo >= 70)
-                                                {
-                                                    lavado_tolvas = 70;
-                                                    Saldo = Saldo - lavado_tolvas;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_tolvas;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 3:
-                                                abrillantado = 65;
-                                                Saldo = Saldo - abrillantado;
+                                        case 1:
+                                            if (Saldo >= 100)
+                                            {
+                                                lavado_completo = 100;
+                                                Saldo = Saldo - lavado_completo;
                                                 operaciones++;
-                                                acumulador_lavado = acumulador_lavado + abrillantado;
+                                                acumulador_lavado = acumulador_lavado + lavado_completo;
                                                 acumulador_total = acumulador_total + acumulador_lavado;
-                                                break;
-                                            case 4:
-                                                if (Saldo >= 80)
-                                                {
-                                                    detallado_general = 80;
-                                                    Saldo = Saldo - detallado_general;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + detallado_general;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 5:
-                                                if (Saldo >= 285)
-                                                {
-                                                    descuento_lavado = ((125 + 70 + 65 + 80) * 10) / 100;
-                                                    paquete_completo = (125 + 70 + 65 + 80) - descuento_lavado;
-                                                    Saldo = Saldo - paquete_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + paquete_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            default:
-                                                Console.WriteLine("Error, respuesta no encontrada");
-                                                break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para realizar cualquier tipo de servico de lavado");
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Lo lamento tu saldo es 0 por favor haz una recarga");
-                                }
-                                Console.WriteLine("¿Quieres otro servicio de lavado");
-                                res_do_lavado = Console.ReadLine();
-                            } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
-                        }
-
-                        //Tamaño SUV
-                        else if (Tam_car == "SUV" || Tam_car == "suv")
-                        {
-                            do
-                            {
-                                //Condicional para verificar que el saldo es mayor a 0
-                                if (Saldo > 0)
-                                {
-                                    //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                    if (Saldo >= 60)
-                                    {
-                                        //Switch del menu de lavado tamaño SUV
-                                        switch (res_lavado)
-                                        {
-                                            case 1:
-                                                if (Saldo >= 150)
-                                                {
-                                                    lavado_completo = 150;
-                                                    Saldo = Saldo - lavado_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-
-                                                break;
-                                            case 2:
-                                                if (Saldo >= 80)
-                                                {
-                                                    lavado_tolvas = 80;
-                                                    Saldo = Saldo - lavado_tolvas;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_tolvas;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 3:
-                                                abrillantado = 60;
-                                                Saldo = Saldo - abrillantado;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                            }
+                                            break;
+                                        case 2:
+                                            if (Saldo >= 65)
+                                            {
+                                                lavado_tolvas = 65;
+                                                Saldo = Saldo - lavado_tolvas;
                                                 operaciones++;
-                                                acumulador_lavado = acumulador_lavado + abrillantado;
+                                                acumulador_lavado = acumulador_lavado + lavado_tolvas;
                                                 acumulador_total = acumulador_total + acumulador_lavado;
-                                                break;
-                                            case 4:
-                                                if (Saldo >= 90)
-                                                {
-                                                    detallado_general = 90;
-                                                    Saldo = Saldo - detallado_general;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + detallado_general;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 5:
-                                                if (Saldo >= 380)
-                                                {
-                                                    descuento_lavado = ((150 + 80 + 60 + 90) * 10) / 100;
-                                                    paquete_completo = (150 + 80 + 60 + 90) - descuento_lavado;
-                                                    Saldo = Saldo - paquete_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + paquete_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            default:
-                                                Console.WriteLine("Error, respuesta no encontrada");
-                                                break;
-                                        }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                            }
+                                            break;
+                                        case 3:
+                                            abrillantado = 50;
+                                            Saldo = Saldo - abrillantado;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + abrillantado;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                            break;
+                                        case 4:
+                                            if (Saldo >= 70)
+                                            {
+                                                detallado_general = 70;
+                                                Saldo = Saldo - detallado_general;
+                                                operaciones++;
+                                                acumulador_lavado = acumulador_lavado + detallado_general;
+                                                acumulador_total = acumulador_total + acumulador_lavado;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                            }
+
+                                            break;
+                                        case 5:
+                                            if (Saldo >= 285)
+                                            {
+                                                descuento_lavado = ((100 + 65 + 50 + 70) * 10) / 100;
+                                                paquete_completo = (100 + 65 + 50 + 70) - descuento_lavado;
+                                                Saldo = Saldo - paquete_completo;
+                                                operaciones++;
+                                                acumulador_lavado = acumulador_lavado + paquete_completo;
+                                                acumulador_total = acumulador_total + acumulador_lavado;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                            }
+
+                                            break;
+                                        default:
+                                            Console.WriteLine("Error, respuesta no encontrada");
+                                            break;
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para realizar cualquier tipo de servico de lavado");
-                                    }
-                                }
-                                else
+                                    Console.WriteLine("¿Quieres otro servicio de lavado?");
+                                    res_do_lavado = Console.ReadLine();
+                                } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
+                            }
+                            else if (Tam_car == "Sedan" || Tam_car == "sedan")
+                            {
+                                //Switch del menu de lavado tamaño sedan
+                                switch (res_lavado)
                                 {
-                                    Console.WriteLine("Lo lamento tu saldo es 0 por favor haz una recarga");
+                                    case 1:
+                                        if (Saldo >= 125)
+                                        {
+                                            lavado_completo = 125;
+                                            Saldo = Saldo - lavado_completo;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + lavado_completo;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    case 2:
+                                        if (Saldo >= 70)
+                                        {
+                                            lavado_tolvas = 70;
+                                            Saldo = Saldo - lavado_tolvas;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + lavado_tolvas;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    case 3:
+                                        abrillantado = 65;
+                                        Saldo = Saldo - abrillantado;
+                                        operaciones++;
+                                        acumulador_lavado = acumulador_lavado + abrillantado;
+                                        acumulador_total = acumulador_total + acumulador_lavado;
+                                        break;
+                                    case 4:
+                                        if (Saldo >= 80)
+                                        {
+                                            detallado_general = 80;
+                                            Saldo = Saldo - detallado_general;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + detallado_general;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    case 5:
+                                        if (Saldo >= 285)
+                                        {
+                                            descuento_lavado = ((125 + 70 + 65 + 80) * 10) / 100;
+                                            paquete_completo = (125 + 70 + 65 + 80) - descuento_lavado;
+                                            Saldo = Saldo - paquete_completo;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + paquete_completo;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    default:
+                                        Console.WriteLine("Error, respuesta no encontrada");
+                                        break;
                                 }
-                                Console.WriteLine("¿Quieres otro servicio de lavado");
-                                res_do_lavado = Console.ReadLine();
-                            } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
+                            }
+                            else if (Tam_car == "SUV" || Tam_car == "suv")
+                            {
+                                //Switch del menu de lavado tamaño SUV
+                                switch (res_lavado)
+                                {
+                                    case 1:
+                                        if (Saldo >= 150)
+                                        {
+                                            lavado_completo = 150;
+                                            Saldo = Saldo - lavado_completo;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + lavado_completo;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+
+                                        break;
+                                    case 2:
+                                        if (Saldo >= 80)
+                                        {
+                                            lavado_tolvas = 80;
+                                            Saldo = Saldo - lavado_tolvas;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + lavado_tolvas;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    case 3:
+                                        abrillantado = 90;
+                                        Saldo = Saldo - abrillantado;
+                                        operaciones++;
+                                        acumulador_lavado = acumulador_lavado + abrillantado;
+                                        acumulador_total = acumulador_total + acumulador_lavado;
+                                        break;
+                                    case 4:
+                                        if (Saldo >= 90)
+                                        {
+                                            detallado_general = 90;
+                                            Saldo = Saldo - detallado_general;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + detallado_general;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    case 5:
+                                        if (Saldo >= 380)
+                                        {
+                                            descuento_lavado = ((150 + 80 + 90 + 90) * 10) / 100;
+                                            paquete_completo = (150 + 80 + 60 + 90) - descuento_lavado;
+                                            Saldo = Saldo - paquete_completo;
+                                            operaciones++;
+                                            acumulador_lavado = acumulador_lavado + paquete_completo;
+                                            acumulador_total = acumulador_total + acumulador_lavado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        break;
+                                    default:
+                                        Console.WriteLine("Error, respuesta no encontrada");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Tamaño no encontrado");
+                            }
+
                         }
                         else
                         {
-                            //Respuesta en caso que el usuario ingrese el tamaño incorrecto
-                            Console.WriteLine("Tamanño del vehiculo incorrecto");
+                            Console.WriteLine("Lo lamento tu saldo es {0:C} por favor haz una recarga",Saldo);
                         }
 
                         break;
@@ -644,4 +589,3 @@ namespace Servicio_de_lavado_de_autos___PF
         }
     }
 }
-
