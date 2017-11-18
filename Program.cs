@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicio_de_lavado_de_autos___PF
+namespace Lavado_de_autos
 {
     class Program
     {
@@ -12,8 +12,8 @@ namespace Servicio_de_lavado_de_autos___PF
         {
             //Variables
             String Tam_car, res_do_lavado, color_auto, reparado, contraseña, res_tarj;
-            Double Saldo = 0.00, descuento_lavado = 0, paquete_completo = 0, tam_pieza, detallado_expres = 0, descuento_color = 0, reparacion = 0, costo_base = 10, descuento_pz = 0, costo_pz = 0, nuevo_saldo = 0, acumulador_total = 0, acumulador_lavado = 0, acumulador_det = 0, acumulador_fb = 0;
-            Int32 menu_op = 0, res_lavado = 0, lavado_completo = 0, lavado_tolvas = 0, abrillantado = 0, detallado_general = 0, res_detallado = 0, operaciones = 0;
+            Double Saldo = 0, descuento_lavado = 0, paquete_completo = 0, tam_pieza, detallado_expres = 0, descuento_color = 0, reparacion = 0, costo_base = 10, descuento_pz = 0, costo_pz = 0, nuevo_saldo = 0, acumulador_total = 0, acumulador_lavado = 0, acumulador_det = 0, acumulador_fb = 0;
+            Int32 menu_op = 0, res_lavado = 0, lavado_completo = 0, lavado_tolvas = 0, abrillantado = 0, detallado_general = 0, res_detallado = 0, operaciones = 0, contador = 0;
             do
             {
                 //Titulo del programa
@@ -33,316 +33,317 @@ namespace Servicio_de_lavado_de_autos___PF
                 {
                     //Lavado 
                     case 1:
-                        Console.WriteLine("Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
-                        Tam_car = Console.ReadLine();
-                        //Menu de lavado
-                        Console.WriteLine("Elige una opcion: ");
-                        Console.WriteLine("1.Lavado Completo ");
-                        Console.WriteLine("2.Lavado de Tolvas ");
-                        Console.WriteLine("3.Abrillantado de vidrio ");
-                        Console.WriteLine("4.Detallado general ");
-                        Console.WriteLine("5.Paquete completo  ");
-                        res_lavado = Convert.ToInt32(Console.ReadLine());
-
-                        //Tamaño compatco
-                        if (Tam_car == "Compacto" || Tam_car == "compacto")
+                        do
                         {
-                            do
+                            //Menu de lavado
+                            Console.WriteLine("Elige una opcion: ");
+                            Console.WriteLine("1.Lavado Completo (Compacto:100$ - Sedan:125$ -SUV:150$)");
+                            Console.WriteLine("2.Lavado de Tolvas(Compacto:65$ - Sedan:70$ -SUV:80$) ");
+                            Console.WriteLine("3.Abrillantado de vidrio (Compacto:50$ - Sedan:65$ -SUV:90$)");
+                            Console.WriteLine("4.Detallado general (Compacto:70$ - Sedan:80$ -SUV:90$)");
+                            Console.WriteLine("5.Paquete completo  (Compacto:256$ - Sedan:306$ -SUV:369$)");
+                            res_lavado = Convert.ToInt32(Console.ReadLine());
+
+                            switch (res_lavado)
                             {
-                                //Condicional para verificar que el saldo es mayor a 0
-                                if (Saldo > 0)
-                                {
-                                    //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                    if (Saldo >= 50)
+
+                                //Caso 1 de lavado completo
+                                case 1:
+                                    Console.WriteLine("¿Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                                    Tam_car = Console.ReadLine();
+                                    //Condicional de tamaño compacto
+                                    if (Tam_car == "Compacto" || Tam_car == "compacto")
                                     {
-                                        //Switch del menu de lavado tamaño compacto
-                                        switch (res_lavado)
+                                        //Condicional de lavado completo en tamaño compacto
+                                        if (Saldo >= 100)
                                         {
-                                            case 1:
-                                                if (Saldo >= 100)
-                                                {
-                                                    lavado_completo = 100;
-                                                    Saldo = Saldo - lavado_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 2:
-                                                if (Saldo >= 65)
-                                                {
-                                                    lavado_tolvas = 65;
-                                                    Saldo = Saldo - lavado_tolvas;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_tolvas;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 3:
-                                                abrillantado = 50;
-                                                Saldo = Saldo - abrillantado;
-                                                operaciones++;                                           
-                                                acumulador_lavado = acumulador_lavado + abrillantado;
-                                                acumulador_total = acumulador_total + acumulador_lavado;
-                                                break;
-                                            case 4:
-                                                if (Saldo >= 70)
-                                                {
-                                                    detallado_general = 70;
-                                                    Saldo = Saldo - detallado_general;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + detallado_general;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-
-                                                break;
-                                            case 5:
-                                                if (Saldo >= 285)
-                                                {
-                                                    descuento_lavado = ((100 + 65 + 50 + 70) * 10) / 100;
-                                                    paquete_completo = (100 + 65 + 50 + 70) - descuento_lavado;
-                                                    Saldo = Saldo - paquete_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + paquete_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-
-                                                break;
-                                            default:
-                                                Console.WriteLine("Error, respuesta no encontrada");
-                                                break;
+                                            lavado_completo = 100;
+                                            Saldo = Saldo - lavado_completo;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + lavado_completo;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional de tamaño Sedan
+                                    }
+                                    else if (Tam_car == "Sedan" || Tam_car == "sedan")
+                                    {
+                                        //Condicional de lavado completo en tamaño sedan
+                                        if (Saldo >= 125)
+                                        {
+                                            lavado_completo = 125;
+                                            Saldo = Saldo - lavado_completo;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + lavado_completo;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional en tamaño suv                        
+                                    }
+                                    else if (Tam_car == "suv" || Tam_car == "SUV")
+                                    {
+                                        //Condicional de lavado completo en tamaño sedan
+                                        if (Saldo >= 125)
+                                        {
+                                            lavado_completo = 125;
+                                            Saldo = Saldo - lavado_completo;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + lavado_completo;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
                                         }
                                     }
-                                    else
+                                    else //En caso de que el usuario no escoja ninguno de los tamaños disponibles
                                     {
-                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para realizar cualquier tipo de servico de lavado");
+                                        Console.WriteLine("el tamaño que escojiste es invalido");
                                     }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Lo lamento tu saldo es 0 por favor haz una recarga");
-                                }
-                                Console.WriteLine("¿Quieres otro servicio de lavado?");
-                                res_do_lavado = Console.ReadLine();
-                            } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
-                        }
-
-                        //Tamaño Sedan
-                        else if (Tam_car == "sedan" || Tam_car == "Sedan")
-                        {
-                            do
-                            {
-                                //Condicional para verificar que el saldo es mayor a 0
-                                if (Saldo > 0)
-                                {
-                                    //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                    if (Saldo >= 65)
+                                    break;
+                                //Caso 2 de lavado de tolvas
+                                case 2:
+                                    Console.WriteLine("¿Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                                    Tam_car = Console.ReadLine();
+                                    //Condicional de tamaño compacto
+                                    if (Tam_car == "Compacto" || Tam_car == "compacto")
                                     {
-                                        //Switch del menu de lavado tamaño sedan
-                                        switch (res_lavado)
+                                        //Condicional de lavado de tolva en tamaño compacto
+                                        if (Saldo >= 65)
                                         {
-                                            case 1:
-                                                if (Saldo >= 125)
-                                                {
-                                                    lavado_completo = 125;
-                                                    Saldo = Saldo - lavado_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 2:
-                                                if (Saldo >= 70)
-                                                {
-                                                    lavado_tolvas = 70;
-                                                    Saldo = Saldo - lavado_tolvas;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_tolvas;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 3:
-                                                abrillantado = 65;
-                                                Saldo = Saldo - abrillantado;
-                                                operaciones++;
-                                                acumulador_lavado = acumulador_lavado + abrillantado;
-                                                acumulador_total = acumulador_total + acumulador_lavado;
-                                                break;
-                                            case 4:
-                                                if (Saldo >= 80)
-                                                {
-                                                    detallado_general = 80;
-                                                    Saldo = Saldo - detallado_general;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + detallado_general;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 5:
-                                                if (Saldo >= 285)
-                                                {
-                                                    descuento_lavado = ((125 + 70 + 65 + 80) * 10) / 100;
-                                                    paquete_completo = (125 + 70 + 65 + 80) - descuento_lavado;
-                                                    Saldo = Saldo - paquete_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + paquete_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            default:
-                                                Console.WriteLine("Error, respuesta no encontrada");
-                                                break;
+                                            lavado_tolvas = 65;
+                                            Saldo = Saldo - lavado_tolvas;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + lavado_tolvas;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional de tamaño Sedan
+                                    }
+                                    else if (Tam_car == "Sedan" || Tam_car == "sedan")
+                                    {
+                                        //Condicional de lavado de tolva en tamaño sedan
+                                        if (Saldo >= 70)
+                                        {
+                                            lavado_tolvas = 70;
+                                            Saldo = Saldo - lavado_tolvas;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + lavado_tolvas;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional en tamaño suv                        
+                                    }
+                                    else if (Tam_car == "suv" || Tam_car == "SUV")
+                                    {
+                                        //Condicional de lavado completo en tamaño suv
+                                        if (Saldo >= 80)
+                                        {
+                                            lavado_tolvas = 70;
+                                            Saldo = Saldo - lavado_tolvas;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + lavado_tolvas;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
                                         }
                                     }
-                                    else
+                                    else //En caso de que el usuario no escoja ninguno de los tamaños disponibles
                                     {
-                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para realizar cualquier tipo de servico de lavado");
+                                        Console.WriteLine("el tamaño que escojiste es invalido");
                                     }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Lo lamento tu saldo es 0 por favor haz una recarga");
-                                }
-                                Console.WriteLine("¿Quieres otro servicio de lavado");
-                                res_do_lavado = Console.ReadLine();
-                            } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
-                        }
-
-                        //Tamaño SUV
-                        else if (Tam_car == "SUV" || Tam_car == "suv")
-                        {
-                            do
-                            {
-                                //Condicional para verificar que el saldo es mayor a 0
-                                if (Saldo > 0)
-                                {
-                                    //Condicional para verificar que el saldo es mayor a la cantidad minia de cualquier servicio de lavado
-                                    if (Saldo >= 60)
+                                    break;
+                                //caso 3 de abrillentado
+                                case 3:
+                                    Console.WriteLine("¿Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                                    Tam_car = Console.ReadLine();
+                                    //Condicional de tamaño compacto
+                                    if (Tam_car == "Compacto" || Tam_car == "compacto")
                                     {
-                                        //Switch del menu de lavado tamaño SUV
-                                        switch (res_lavado)
+                                        //Condicional de abrillentado de vidrio en tamaño compacto
+                                        if (Saldo >= 50)
                                         {
-                                            case 1:
-                                                if (Saldo >= 150)
-                                                {
-                                                    lavado_completo = 150;
-                                                    Saldo = Saldo - lavado_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-
-                                                break;
-                                            case 2:
-                                                if (Saldo >= 80)
-                                                {
-                                                    lavado_tolvas = 80;
-                                                    Saldo = Saldo - lavado_tolvas;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + lavado_tolvas;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 3:
-                                                abrillantado = 60;
-                                                Saldo = Saldo - abrillantado;
-                                                operaciones++;
-                                                acumulador_lavado = acumulador_lavado + abrillantado;
-                                                acumulador_total = acumulador_total + acumulador_lavado;
-                                                break;
-                                            case 4:
-                                                if (Saldo >= 90)
-                                                {
-                                                    detallado_general = 90;
-                                                    Saldo = Saldo - detallado_general;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + detallado_general;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            case 5:
-                                                if (Saldo >= 380)
-                                                {
-                                                    descuento_lavado = ((150 + 80 + 60 + 90) * 10) / 100;
-                                                    paquete_completo = (150 + 80 + 60 + 90) - descuento_lavado;
-                                                    Saldo = Saldo - paquete_completo;
-                                                    operaciones++;
-                                                    acumulador_lavado = acumulador_lavado + paquete_completo;
-                                                    acumulador_total = acumulador_total + acumulador_lavado;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Lo lamento tu saldo es insuficiente");
-                                                }
-                                                break;
-                                            default:
-                                                Console.WriteLine("Error, respuesta no encontrada");
-                                                break;
+                                            abrillantado = 50;
+                                            Saldo = Saldo - abrillantado;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + abrillantado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional de tamaño Sedan
+                                    }
+                                    else if (Tam_car == "Sedan" || Tam_car == "sedan")
+                                    {
+                                        //Condicional de abrillentado en tamaño sedan
+                                        if (Saldo >= 65)
+                                        {
+                                            abrillantado = 65;
+                                            Saldo = Saldo - abrillantado;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + abrillantado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional en tamaño suv                        
+                                    }
+                                    else if (Tam_car == "suv" || Tam_car == "SUV")
+                                    {
+                                        //Condicional de abrillentado en tamaño suv
+                                        if (Saldo >= 90)
+                                        {
+                                            abrillantado = 50;
+                                            Saldo = Saldo - abrillantado;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + abrillantado;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
                                         }
                                     }
-                                    else
+                                    else //En caso de que el usuario no escoja ninguno de los tamaños disponibles
                                     {
-                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para realizar cualquier tipo de servico de lavado");
+                                        Console.WriteLine("el tamaño que escojiste es invalido");
                                     }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Lo lamento tu saldo es 0 por favor haz una recarga");
-                                }
-                                Console.WriteLine("¿Quieres otro servicio de lavado");
-                                res_do_lavado = Console.ReadLine();
-                            } while (res_do_lavado == "Si" || res_do_lavado == "si" || res_do_lavado == "SI");
-                        }
-                        else
-                        {
-                            //Respuesta en caso que el usuario ingrese el tamaño incorrecto
-                            Console.WriteLine("Tamanño del vehiculo incorrecto");
-                        }
+                                    break;
+                                case 4:
+                                    Console.WriteLine("¿Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                                    Tam_car = Console.ReadLine();
+                                    //Condicional de tamaño compacto
+                                    if (Tam_car == "Compacto" || Tam_car == "compacto")
+                                    {
+                                        //Condicional de dettallado general de vidrio en tamaño compacto
+                                        if (Saldo >= 70)
+                                        {
+                                            detallado_general = 70;
+                                            Saldo = Saldo - detallado_general;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + detallado_general;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional de tamaño Sedan
+                                    }
+                                    else if (Tam_car == "Sedan" || Tam_car == "sedan")
+                                    {
+                                        //Condicional de detallado general en tamaño sedan
+                                        if (Saldo >= 80)
+                                        {
+                                            detallado_general = 80;
+                                            Saldo = Saldo - detallado_general;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + detallado_general;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional en tamaño suv                        
+                                    }
+                                    else if (Tam_car == "suv" || Tam_car == "SUV")
+                                    {
+                                        //Condicional de detallado general en tamaño suv
+                                        if (Saldo >= 90)
+                                        {
+                                            detallado_general = 90;
+                                            Saldo = Saldo - detallado_general;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + detallado_general; ;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                    }
+                                    else //En caso de que el usuario no escoja ninguno de los tamaños disponibles
+                                    {
+                                        Console.WriteLine("el tamaño que escojiste es invalido");
+                                    }
+                                    break;
+                                case 5:
+                                    Console.WriteLine("¿Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                                    Tam_car = Console.ReadLine();
+                                    //Condicional de tamaño compacto
+                                    if (Tam_car == "Compacto" || Tam_car == "compacto")
+                                    {
+                                        //Condicional de paquete completo de vidrio en tamaño compacto
+                                        if (Saldo >= 256)
+                                        {
+                                            descuento_lavado = ((100 + 65 + 50 + 70) * 10) / 100;
+                                            paquete_completo = (100 + 65 + 50 + 70) - descuento_lavado;
+                                            Saldo = Saldo - paquete_completo;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + paquete_completo;
+                                            Console.WriteLine("Obtienes un descuento del 10% por seleccionar este paquete");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional de tamaño Sedan
+                                    }
+                                    else if (Tam_car == "Sedan" || Tam_car == "sedan")
+                                    {
+                                        //Condicional de paquete completo en tamaño sedan
+                                        if (Saldo >= 306)
+                                        {
+                                            descuento_lavado = ((100 + 65 + 50 + 70) * 10) / 100;
+                                            paquete_completo = (100 + 65 + 50 + 70) - descuento_lavado;
+                                            Saldo = Saldo - paquete_completo;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + paquete_completo;
+                                            Console.WriteLine("Obtienes un descuento del 10% por seleccionar este paquete");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                        //Condicional en tamaño suv                        
+                                    }
+                                    else if (Tam_car == "suv" || Tam_car == "SUV")
+                                    {
+                                        //Condicional de paquete completo en tamaño suv
+                                        if (Saldo >= 369)
+                                        {
 
+                                            descuento_lavado = ((100 + 65 + 50 + 70) * 10) / 100;
+                                            paquete_completo = (100 + 65 + 50 + 70) - descuento_lavado;
+                                            Saldo = Saldo - paquete_completo;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_lavado = acumulador_lavado + paquete_completo;
+                                            Console.WriteLine("Obtienes un descuento del 10% por seleccionar este paquete");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento tu saldo es insuficiente");
+                                        }
+                                    }
+                                    else //En caso de que el usuario no escoja ninguno de los tamaños disponibles
+                                    {
+                                        Console.WriteLine("el tamaño que escojiste es invalido");
+                                    }
+                                    break;
+                                default:
+                                    Console.WriteLine("Error, respuesta no encontrada");
+                                    break;
+                            }
+                            Console.WriteLine("¿Quieres otro servicio de lavado?");
+                            res_do_lavado = Console.ReadLine();
+                        } while (res_do_lavado == "si" || res_do_lavado == "SI" || res_do_lavado == "Si");
                         break;
                     case 2:
                         //Pregnta sobre el color del auto para verificar si se le aplica el 15%
@@ -350,18 +351,18 @@ namespace Servicio_de_lavado_de_autos___PF
                         color_auto = Console.ReadLine();
                         //Menu de detallado
                         Console.WriteLine("Elige una opcion: ");
-                        Console.WriteLine("1.Detallado Express ");
-                        Console.WriteLine("2.Reparación de defensa ");
-                        Console.WriteLine("3.Reparación de rines ");
+                        Console.WriteLine("1.Detallado Express (Compacto: 50$ - Sedan: 75$ - SUV: 100$ )");
+                        Console.WriteLine("2.Reparación de defensa (Delantera: 80$ - Trasera:75$) ");
+                        Console.WriteLine("3.Reparación de rines - 100$");
                         res_detallado = Convert.ToInt32(Console.ReadLine());
 
-                        Console.WriteLine("Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV");
-                        Tam_car = Console.ReadLine();
                         switch (res_detallado)
                         {
                             case 1:
                                 if (Saldo > 0)
                                 {
+                                    Console.WriteLine("¿Cual es el tamaño del vehiculo? (Compacto - Sedan - SUV)");
+                                    Tam_car = Console.ReadLine();
                                     //Condicional del Tamaño del carro en Compacto
                                     if (Tam_car == "compacto" || Tam_car == "Compacto")
                                     {
@@ -370,20 +371,19 @@ namespace Servicio_de_lavado_de_autos___PF
                                             //Condicional del color del vehiculo
                                             if (color_auto == "rojo" || color_auto == "Rojo" || color_auto == "negro" || color_auto == "Negro")
                                             {
+                                                Console.WriteLine("Debido a que el color de tu vehiculo es {0} obtienes un descuento de 15%", color_auto);
                                                 descuento_color = (50 * 15) / 100;
                                                 detallado_expres = 50 - descuento_color;
                                                 Saldo = Saldo - detallado_expres;
-                                                operaciones++;
+                                                operaciones++;//Contador de cada servicio que se realiza en el dia 
                                                 acumulador_det = acumulador_det + detallado_expres;
-                                                acumulador_total = acumulador_total + acumulador_det;
                                             }
                                             else
                                             {
                                                 detallado_expres = 50;
                                                 Saldo = Saldo - detallado_expres;
-                                                operaciones++;
+                                                operaciones++;//Contador de cada servicio que se realiza en el dia 
                                                 acumulador_det = acumulador_det + detallado_expres;
-                                                acumulador_total = acumulador_total + acumulador_det;
                                             }
                                         }
                                         else
@@ -400,20 +400,19 @@ namespace Servicio_de_lavado_de_autos___PF
                                             //Condicional del color del vehiculo
                                             if (color_auto == "rojo" || color_auto == "Rojo" || color_auto == "negro" || color_auto == "Negro")
                                             {
+                                                Console.WriteLine("Debido a que el color de tu vehiculo es {0} obtienes un descuento de 15%", color_auto);
                                                 descuento_color = (75 * 15) / 100;
                                                 detallado_expres = 75 - descuento_color;
                                                 Saldo = Saldo - detallado_expres;
-                                                operaciones++;
+                                                operaciones++;//Contador de cada servicio que se realiza en el dia 
                                                 acumulador_det = acumulador_det + detallado_expres;
-                                                acumulador_total = acumulador_total + acumulador_det;
                                             }
                                             else
                                             {
                                                 detallado_expres = 75;
                                                 Saldo = Saldo - detallado_expres;
-                                                operaciones++;
+                                                operaciones++;//Contador de cada servicio que se realiza en el dia 
                                                 acumulador_det = acumulador_det + detallado_expres;
-                                                acumulador_total = acumulador_total + acumulador_det;
                                             }
                                         }
                                         else
@@ -430,20 +429,19 @@ namespace Servicio_de_lavado_de_autos___PF
                                             //Condicional del color del vehiculo
                                             if (color_auto == "rojo" || color_auto == "Rojo" || color_auto == "negro" || color_auto == "Negro")
                                             {
+                                                Console.WriteLine("Debido a que el color de tu vehiculo es {0} obtienes un descuento de 15%", color_auto);
                                                 descuento_color = (100 * 15) / 100;
                                                 detallado_expres = 100 - descuento_color;
                                                 Saldo = Saldo - detallado_expres;
-                                                operaciones++;
+                                                operaciones++;//Contador de cada servicio que se realiza en el dia 
                                                 acumulador_det = acumulador_det + detallado_expres;
-                                                acumulador_total = acumulador_total + acumulador_det;
                                             }
                                             else
                                             {
                                                 detallado_expres = 100;
                                                 Saldo = Saldo - detallado_expres;
-                                                operaciones++;
+                                                operaciones++;//Contador de cada servicio que se realiza en el dia 
                                                 acumulador_det = acumulador_det + detallado_expres;
-                                                acumulador_total = acumulador_total + acumulador_det;
                                             }
                                         }
                                         else
@@ -465,28 +463,44 @@ namespace Servicio_de_lavado_de_autos___PF
                                 }
                                 break;
                             case 2:
-                                //Pregunta para verificar el tipo de reparad
+                                //Pregunta para verificar el tipo de reparacion 
                                 Console.WriteLine("¿Delantera o trasera?");
                                 reparado = Console.ReadLine();
                                 //Condicional del reparado delantero
                                 if (reparado == "delantera" || reparado == "Delantera")
                                 {
+                                    //Condicional de descuento 
                                     if (color_auto == "rojo" || color_auto == "Rojo" || color_auto == "negro" || color_auto == "Negro")
                                     {
-                                        descuento_color = (80 * 15) / 100;
+                                        descuento_color = (80 * /*descuento --> */ 15) / 100;
                                         reparacion = 80 - descuento_color;
-                                        Saldo = Saldo - reparacion;
-                                        operaciones++;
-                                        acumulador_det = acumulador_det + reparacion;
-                                        acumulador_total = acumulador_total + acumulador_det;
+                                        //Condicional para verificar que el saldo es igual o mayor al costo de este servicio
+                                        if (Saldo >= reparacion)
+                                        {
+                                            Console.WriteLine("Debido a que el color de tu vehiculo es {0} obtienes un descuento de 15%", color_auto);
+                                            Saldo = Saldo - reparacion;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_det = acumulador_det + reparacion;
+                                        } else
+                                        {
+                                            Console.WriteLine("Lo lamento no tienes saldo suficiente para este servicio");
+                                        }
                                     }
                                     else
                                     {
                                         reparacion = 80;
-                                        Saldo = Saldo - reparacion;
-                                        operaciones++;
-                                        acumulador_det = acumulador_det + reparacion;
-                                        acumulador_total = acumulador_total + acumulador_det;
+                                        //Condicional para verificar que el saldo es igual o mayor al costo de este servicio
+                                        if (Saldo >= reparacion)
+                                        {
+                                            Saldo = Saldo - reparacion;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_det = acumulador_det + reparacion;
+                                        } else
+                                        {
+                                            Console.WriteLine("Lo lamento no tienes saldo sufieciente para este servicio");
+                                        }
+
+
                                     }
                                 }
 
@@ -497,18 +511,33 @@ namespace Servicio_de_lavado_de_autos___PF
                                     {
                                         descuento_color = (75 * 15) / 100;
                                         reparacion = 75 - descuento_color;
-                                        Saldo = Saldo - reparacion;
-                                        operaciones++;
-                                        acumulador_det = acumulador_det + reparacion;
-                                        acumulador_total = acumulador_total + acumulador_det;
+                                        if (Saldo>=reparacion)
+                                        {
+                                            Console.WriteLine("Debido a que el color de tu vehiculo es {0} obtienes un descuento de 15%", color_auto);
+                                            Saldo = Saldo - reparacion;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_det = acumulador_det + reparacion;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento no tienes saldo sufieciente para este servicio");
+                                        }
+
                                     }
                                     else
                                     {
                                         reparacion = 75;
-                                        Saldo = Saldo - reparacion;
-                                        operaciones++;
-                                        acumulador_det = acumulador_det + reparacion;
-                                        acumulador_total = acumulador_total + acumulador_det;
+                                        //Condicional para verificar que el saldo es igual o mayor al costo de este servicio
+                                        if (Saldo >= reparacion)
+                                        {
+                                            Saldo = Saldo - reparacion;
+                                            operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                            acumulador_det = acumulador_det + reparacion;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Lo lamento no tienes saldo sufieciente para este servicio");
+                                        }
                                     }
                                 }
                                 else
@@ -523,18 +552,33 @@ namespace Servicio_de_lavado_de_autos___PF
                                 {
                                     descuento_color = (100 * 15) / 100;
                                     reparacion = 100 - descuento_color;
-                                    Saldo = Saldo - reparacion;
-                                    operaciones++;
-                                    acumulador_det = acumulador_det + reparacion;
-                                    acumulador_total = acumulador_total + acumulador_det;
+                                    //Condicional para verificar si el saldo es igual o mayor al costo de este servicio
+                                    if (Saldo >= reparacion)
+                                    {
+                                        Console.WriteLine("Debido a que el color de tu vehiculo es {0} obtienes un descuento de 15%", color_auto);
+                                        Saldo = Saldo - reparacion;
+                                        operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                        acumulador_det = acumulador_det + reparacion;
+                                    } else
+                                    {
+                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para este servicio");
+                                    }
+
                                 }
                                 else
                                 {
                                     reparacion = 100;
-                                    Saldo = Saldo - reparacion;
-                                    operaciones++;
-                                    acumulador_det = acumulador_det + reparacion;
-                                    acumulador_total = acumulador_total + acumulador_det;
+                                    //Condicional para verificar que el saldo es igual o mayor al costo de este servicio
+                                    if (Saldo >= reparacion)
+                                    {
+                                        Saldo = Saldo - reparacion;
+                                        operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                        acumulador_det = acumulador_det + reparacion;
+                                    } else
+                                    {
+                                        Console.WriteLine("Lo lamento tu saldo es insuficiente para este servicio");
+                                    }
+
                                 }
                                 break;
                             default:
@@ -546,58 +590,96 @@ namespace Servicio_de_lavado_de_autos___PF
                     case 3:
                         Console.WriteLine("Ingresa la dimension de la pieza en centimetros cuadrados");
                         tam_pieza = Convert.ToDouble(Console.ReadLine());
-                        //Condicional para descuento de mas de 50 cm cuadrados
-                        if (tam_pieza > 50 && tam_pieza < 100)
+                        if (Saldo > 0)
                         {
-                            descuento_pz = (((tam_pieza / costo_base) * 15) * /*descuento -->*/5) / 100;
-                            costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
-                            Saldo = Saldo - costo_pz;
-                            operaciones++;
-                            acumulador_fb = acumulador_fb + costo_pz;
-                            acumulador_total = acumulador_total + costo_pz;
+                            //Condicional para descuento de mas de 50 cm cuadrados
+                            if (tam_pieza > 50 && tam_pieza < 100)
+                            {
+                                descuento_pz = (((tam_pieza / costo_base) * 15) * /*descuento -->*/5) / 100;
+                                costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
+                                //Condicional para verificar que el saldo es igual o mayor al costo del del servicio
+                                if (costo_pz >= Saldo)
+                                {
+                                    Console.WriteLine("Debido a la diemnsion de la pieza obtienes un descuento de 5%");
+                                    Saldo = Saldo - costo_pz;
+                                    operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                    acumulador_fb = acumulador_fb + costo_pz;
+                                } else
+                                {
+                                    Console.WriteLine("Lo lamento tu saldo es insuficiente para este tamaño de pieza");
+                                }
+                              
 
-                        }
-                        else if (tam_pieza > 100 && tam_pieza < 150) //Condicional para descuento de mas de 100 cm cuadrados y menos de 150
-                        {
-                            descuento_pz = (((tam_pieza / costo_base) * 15) * /*descuento -->*/ 10) / 100;
-                            costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
-                            Saldo = Saldo - costo_pz;
-                            operaciones++;
-                            acumulador_fb = acumulador_fb + costo_pz;
-                            acumulador_total = acumulador_total + costo_pz;
-                        }
-                        else if (tam_pieza > 150) //Condicional para descuento de mas de 150 cm cuadrados
-                        {
-                            descuento_pz = (((tam_pieza / costo_base) * 15) * /*descuento -->*/15) / 100;
-                            costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
-                            Saldo = Saldo - costo_pz;
-                            operaciones++;
-                            acumulador_fb = acumulador_fb + costo_pz;
-                            acumulador_total = acumulador_total + costo_pz;
-                        }
-                        else if (tam_pieza > 0 && tam_pieza < 50)
-                        {
-                            costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
-                            Saldo = Saldo - costo_pz;
-                            operaciones++;
-                            acumulador_fb = acumulador_fb + costo_pz;
-                            acumulador_total = acumulador_total + costo_pz;
+                            }
+                            else if (tam_pieza > 100 && tam_pieza < 150) //Condicional para descuento de mas de 100 cm cuadrados y menos de 150
+                            {
+                                descuento_pz = (((tam_pieza / costo_base) * 15) * /*descuento -->*/ 10) / 100;
+                                costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
+                                //Condicional para verificar que el saldo es igual o mayor al costo del del servicio
+                                if (Saldo >= costo_pz)
+                                {
+                                    Console.WriteLine("Debido a la diemnsion de la pieza obtienes un descuento de 10%");
+                                    Saldo = Saldo - costo_pz;
+                                    operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                    acumulador_fb = acumulador_fb + costo_pz;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Lo lamento tu saldo es insuficiente para este tamaño de pieza");
+                                }
+
+                            }
+                            else if (tam_pieza > 150) //Condicional para descuento de mas de 150 cm cuadrados
+                            {
+                                descuento_pz = (((tam_pieza / costo_base) * 15) * /*descuento -->*/15) / 100;
+                                costo_pz = ((tam_pieza / costo_base) * 15) - descuento_pz;
+                                //Condicional para verificar que el saldo es igual o mayor al costo del del servicio
+                                if (Saldo >= costo_pz)
+                                {
+                                    Console.WriteLine("Debido a la diemnsion de la pieza obtienes un descuento de 15%");
+                                    Saldo = Saldo - costo_pz;
+                                    operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                    acumulador_fb = acumulador_fb + costo_pz;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Lo lamento tu saldo es insuficiente para este tamaño de pieza");
+                                }
+
+                            }
+                            else if (tam_pieza > 0 && tam_pieza < 50)
+                            {
+                                costo_pz = ((tam_pieza / costo_base) * 15);
+                                if (Saldo >= costo_pz)
+                                {
+                                    Saldo = Saldo - costo_pz;
+                                    operaciones++;//Contador de cada servicio que se realiza en el dia 
+                                    acumulador_fb = acumulador_fb + costo_pz;
+                                } else
+                                {
+                                    Console.WriteLine("Lo lamento tu saldo es insuficiente para este tamaño de pieza");
+                                }
+                       
+                            }
+                            else
+                            {
+                                Console.WriteLine("El tamaño de la pieza es invalido");
+                            }
+
                         }
                         else
                         {
-                            Console.WriteLine("El tamaño de la pieza es invalido");
+                            Console.WriteLine("Lo lamento tu saldo es insuficiente por favor haz una recarga");
                         }
-
-
                         break;
                     case 4:
                         //Pregunta para verificar si el usuario tiene tarjeta
-                        Console.WriteLine("Tienes tarjeta");
+                        Console.WriteLine("¿Tienes tarjeta?");
                         res_tarj = Console.ReadLine();
                         //Condicional en caso de que si tenga
                         if (res_tarj == "si" || res_tarj == "Si")
                         {
-                            Console.WriteLine("¿Cuanto saldo quieres recargar");
+                            Console.WriteLine("¿Cuanto saldo quieres recargar?");
                             nuevo_saldo = Convert.ToDouble(Console.ReadLine());
                             Saldo = Saldo + nuevo_saldo;
 
@@ -605,7 +687,7 @@ namespace Servicio_de_lavado_de_autos___PF
                         else if (res_tarj == "no" || res_tarj == "No")
                         {
                             Console.WriteLine("El costo de una terjeta es de 25.00 $");
-                            Console.WriteLine("¿Cuanto saldo quieres recargar");
+                            Console.WriteLine("¿Cuanto saldo quieres recargar?");
                             nuevo_saldo = Convert.ToDouble(Console.ReadLine());
                             nuevo_saldo = nuevo_saldo - 25;
                             Saldo = Saldo + nuevo_saldo;
@@ -624,16 +706,18 @@ namespace Servicio_de_lavado_de_autos___PF
                             contraseña = Console.ReadLine();
                             if (contraseña == "LavaCar2017")
                             {
+                                acumulador_total = acumulador_lavado + acumulador_fb + acumulador_det;
                                 Console.WriteLine("Numero de operaciones: {0}", operaciones);
                                 Console.WriteLine("Cantidad de lavado: {0:C}", acumulador_lavado);
                                 Console.WriteLine("Cantidad de detallado: {0:C}", acumulador_det);
-                                Console.WriteLine("Cantidad de reparacion de fibra de carbono: {0:C}");
+                                Console.WriteLine("Cantidad de reparacion de fibra de carbono: {0:C}", acumulador_fb);
                                 Console.WriteLine("Cantidad total:{0:C}", acumulador_total);
-                            } else
+                            }
+                            else
                             {
                                 Console.WriteLine("Contraseña incorrecta");
                             }
-                        } while (contraseña == "LavaCar2017");
+                        } while (contraseña != "LavaCar2017");
                         break;
                     default:
                         Console.WriteLine("La opcion que escojiste es invalida");
@@ -644,4 +728,3 @@ namespace Servicio_de_lavado_de_autos___PF
         }
     }
 }
-
